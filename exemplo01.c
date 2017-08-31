@@ -5,43 +5,61 @@
 
 #define ERRO_ENTRADA -1
 #define ENTRADA_OK 0
+#define EH_PRIMO 1
+#define NAO_PRIMO 0
+#define USO "USO: %s <LIMITE INFERIOR> <LIMITE SUPERIOR>\n"
 
+/*
+ * Verifica se um numero e primo (força bruta)
+ */ 
 int ehprimo(long int n) {
-            int primo = 1;
-            long int i;
-            for (i=2;i<sqrt(n+1);i++)
-            {
-                        if ((n%i)==0)
-                        {
-                                    primo=0;
-                                    break;
-                        }
-            }
-            return primo;
+	int primo = EH_PRIMO;
+    long int i;
+    for (i = 2; i < sqrt(n + 1); i++) {
+		if ( 0 == (n%i) ) {
+			primo = NAO_PRIMO;
+            break;
+        }
+    }
+    return primo;
 }
- 
+
+/*
+ * Valida os parãmetros de entrada:
+ * O limite inferior e superior são obrigatórios.
+ * O limite inferior deve ser menor que o superior.
+ * O limite inferior e superior devem ser maiores que zero.
+ * É sempre bom verificar o valor máximo aceitável usando limits.h.
+ * long int * inf - O ponteiro é necessário já que vamos alterar o valor dentro da função!
+ * long int * sup - O mesmo aqui!
+ */ 
 int retorna_inf_sup(int argc, char ** argv, long int * inf, long int * sup) {
 
+		// argc vale no mínimo 1, já que o nome do executável está em argv[0]
+		// em nosso caso, existem dois parãmetros obrigatórios inf e sup
 		if (argc < 3) {
 				printf("Os parâmetros inferior e superior são obrigatórios!\n");
-				printf("USO: %s <LIMITE INFERIOR> <LIMITE SUPERIOR>\n", argv[0]);
+				printf(USO, argv[0]);
 				return ERRO_ENTRADA;
 		}
 
+		// para atribuir um valor a um ponteiro, é necessário "dereference"
 		*inf = atoi(argv[1]);
 		*sup = atoi(argv[2]);
-		if (*inf < 0 || LONG_MAX < *inf) {
-				printf("O limite inferior deve ser maior que zero e menor que %12.5e!\n", LONG_MAX);
+
+		if (*inf < 1 || LONG_MAX < *inf) {
+				printf("O limite inferior '%ld' está fora do intervalo aceitável!\n", *inf);
 				return ERRO_ENTRADA;
 		}
-		if (*sup < 0 || LONG_MAX < *sup) {
-				printf("O limite superior deve ser maior que zero e menor que %12.5e!\n", LONG_MAX);
+		if (*sup < 1 || LONG_MAX < *sup) {
+				printf("O limite superior '%ld' está fora do intervalo aceitável!\n", *sup);
 				return ERRO_ENTRADA;
 		}
 		if (*sup <= *inf ) {
-				printf("O limite superior deve ser maior que o inferior!\n");
+				printf("O limite superior '%ld' deve ser maior que o inferior '%ld'!\n", *sup, *inf);
 				return ERRO_ENTRADA;
 		}
+
 		return ENTRADA_OK;
 }	
 
