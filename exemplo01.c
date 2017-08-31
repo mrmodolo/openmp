@@ -1,10 +1,12 @@
 #ifdef _OPENMP
 #include <omp.h>
 #endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <limits.h>
+#include <time.h>
 
 #define ERRO_ENTRADA -1
 #define ENTRADA_OK 0
@@ -77,6 +79,10 @@ int main(int argc, char ** argv) {
 		exit(EXIT_FAILURE);
 	}
 
+	// Inicializa
+	clock_t start = clock();
+	double omp_start = omp_get_wtime();
+
 	// Primeiro teste
 	#pragma omp parallel for reduction(+:cp)
 	for (i = inf; i <= sup; i++) {
@@ -88,7 +94,13 @@ int main(int argc, char ** argv) {
 		}
 	}
 
-	printf("Count=%ld\n",cp);
+	// Fim!
+	clock_t end = clock();
+	double omp_end = omp_get_wtime();
+	double elapsed_time = (end-start)/(double)CLOCKS_PER_SEC;
+	double omp_elapsed_time = omp_end - omp_start;
+
+	printf("count: %ld user elapsed: %lf omp elapsed: %lf\n", cp, elapsed_time, omp_elapsed_time);
 
 	return 0;
 }
