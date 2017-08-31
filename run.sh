@@ -21,21 +21,30 @@ set -o nounset                                  # Treat unset variables as an er
 
 INF=2
 SUP=1000000
-CORES=4
-export OMP_NUM_THREADS=$(echo "4*8" | bc)
+NPROCS=1
+nprocs=$(grep '^physical id' /proc/cpuinfo  | sort -u | wc -l)
+ncores=$(grep '^processor' /proc/cpuinfo | sort -u | wc -l)
+coresperproc=$(($ncores/$nprocs))
+OMP_NUM_THREADS=$(($NPROCS*$coresperproc))
 
 clear
 
+echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
 echo ""
-echo "Normal: ./exemplo01 $INF $SUP"
-time ./exemplo01 $INF $SUP
+
+echo "1 Core: taskset --cpu-list 0 ./exemplo01 $INF $SUP"
+time taskset --cpu-list 0 ./exemplo01 $INF $SUP
 
 echo ""
-echo "2 Cores: taskset 0x3 ./exemplo01 $INF $SUP"
-time taskset 0x3 ./exemplo01 $INF $SUP
+echo "2 Cores: taskset --cpu-list 0,1 ./exemplo01 $INF $SUP"
+time taskset --cpu-list 0,1 ./exemplo01 $INF $SUP
 
 echo ""
-echo "4 Cores: taskset 0xF ./exemplo01 $INF $SUP"
-time taskset 0xF ./exemplo01 $INF $SUP
+echo "3 Cores: taskset --cpu-list 0,1,2 ./exemplo01 $INF $SUP"
+time taskset --cpu-list 0,1,2 ./exemplo01 $INF $SUP
+
+echo ""
+echo "4 Cores: taskset --cpu-list 0,1,2,3 ./exemplo01 $INF $SUP"
+time taskset --cpu-list 0,1,2,3 ./exemplo01 $INF $SUP
 
 echo ""
