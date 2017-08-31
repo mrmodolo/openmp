@@ -20,7 +20,7 @@
 set -o nounset                                  # Treat unset variables as an error
 
 INF=2
-SUP=1000000
+SUP=9999999
 NPROCS=1
 nprocs=$(grep '^physical id' /proc/cpuinfo  | sort -u | wc -l)
 ncores=$(grep '^processor' /proc/cpuinfo | sort -u | wc -l)

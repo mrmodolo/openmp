@@ -1,5 +1,2 @@
-all:MP
-	gcc exemplo01.o -o exemplo01 -lm
-
-MP:
-	gcc -c exemplo01.c
+exemplo01: exemplo01.c
+	gcc -Wall exemplo01.c -fopenmp -lm -o exemplo01	
