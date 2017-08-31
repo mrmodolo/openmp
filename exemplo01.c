@@ -65,23 +65,25 @@ int retorna_inf_sup(int argc, char ** argv, long int * inf, long int * sup) {
 
 int main(int argc, char ** argv) {
            
-            long int i;
-            long int cp=0;
-            long int inf=0;
-            long int sup=0;
+	long int i = 0;
+	long int cp = 0;
+	long int inf = 0;
+	long int sup = 0;
 
-			if ( retorna_inf_sup(argc, argv, &inf, &sup) != ENTRADA_OK ) {
-				exit(EXIT_FAILURE);
-			}
+	if ( retorna_inf_sup(argc, argv, &inf, &sup) != ENTRADA_OK ) {
+		exit(EXIT_FAILURE);
+	}
 
-            for (i=inf; i<=sup; i++)
-                        if (ehprimo(i))
-                        {
-                                    cp++;
-                                    #ifdef DEBUG
-                                    printf("%ld, ",i);
-                                    #endif
-                        }
-            printf("\nCount=%ld\n",cp);
-            return 0;
+	for (i = inf; i <= sup; i++) {
+		if (ehprimo(i))	{
+			cp++;
+			#ifdef DEBUG
+			printf("%ld, ",i);
+			#endif
+		}
+	}
+
+	printf("Count=%ld\n",cp);
+
+	return 0;
 }
