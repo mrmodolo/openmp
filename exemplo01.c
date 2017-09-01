@@ -84,7 +84,7 @@ int main(int argc, char ** argv) {
 	double omp_start = omp_get_wtime();
 
 	// Primeiro teste
-	#pragma omp parallel for reduction(+:cp)
+	#pragma omp parallel for schedule(runtime) reduction(+:cp)
 	for (i = inf; i <= sup; i++) {
 		if (ehprimo(i))	{
 			cp++;

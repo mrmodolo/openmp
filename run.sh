@@ -20,31 +20,27 @@
 set -o nounset                                  # Treat unset variables as an error
 
 INF=2
-SUP=9999999
+#SUP=9999999
+SUP=1000000
 NPROCS=1
 nprocs=$(grep '^physical id' /proc/cpuinfo  | sort -u | wc -l)
 ncores=$(grep '^processor' /proc/cpuinfo | sort -u | wc -l)
 coresperproc=$(($ncores/$nprocs))
 OMP_NUM_THREADS=$(($NPROCS*$coresperproc))
+KIND=(static dynamic guided auto)
 
 clear
 
-echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
-echo ""
-
-echo "1 Core: taskset --cpu-list 0 ./exemplo01 $INF $SUP"
-time taskset --cpu-list 0 ./exemplo01 $INF $SUP
-
-echo ""
-echo "2 Cores: taskset --cpu-list 0,1 ./exemplo01 $INF $SUP"
-time taskset --cpu-list 0,1 ./exemplo01 $INF $SUP
-
-echo ""
-echo "3 Cores: taskset --cpu-list 0,1,2 ./exemplo01 $INF $SUP"
-time taskset --cpu-list 0,1,2 ./exemplo01 $INF $SUP
-
-echo ""
-echo "4 Cores: taskset --cpu-list 0,1,2,3 ./exemplo01 $INF $SUP"
-time taskset --cpu-list 0,1,2,3 ./exemplo01 $INF $SUP
-
-echo ""
+for K in "${KIND[@]}"
+do	
+	export OMP_schedule=$K
+	echo "OMP_schedule=$OMP_schedule"
+	echo ""
+	for T in $(seq 1 4)
+	do
+		echo "OMP_NUM_THREADS=$T"
+		echo "OMP_NUM_THREADS=$T; time ./exemplo01 $INF $SUP"
+		export OMP_NUM_THREADS=$T; time ./exemplo01 $INF $SUP
+		echo ""
+	done
+done
