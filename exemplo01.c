@@ -101,6 +101,7 @@ int main(int argc, char ** argv) {
 	double omp_elapsed_time = omp_end - omp_start;
 
 	printf("count: %ld user elapsed: %lf omp elapsed: %lf\n", cp, elapsed_time, omp_elapsed_time);
+	fprintf(stderr, "%ld\n", cp);
 
 	return 0;
 }
