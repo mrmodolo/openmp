@@ -19,7 +19,8 @@
 int ehprimo(long int n) {
 	int primo = EH_PRIMO;
     long int i;
-    for (i = 2; i < sqrt(n + 1); i++) {
+	const long int LIMITE = sqrt(n + 1);
+    for (i = 2; i < LIMITE; i++) {
 		if ( 0 == (n%i) ) {
 			primo = NAO_PRIMO;
             break;
