@@ -1,8 +1,6 @@
-// Exemplo para OpenMP
 #ifdef _OPENMP
-#include <omp.h>
-#endif
-
+	#include <omp.h>
+#endif /* _OPENMP */
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -103,6 +101,5 @@ int main(int argc, char ** argv) {
 
 	printf("count: %ld user elapsed: %lf omp elapsed: %lf\n", cp, elapsed_time, omp_elapsed_time);
 	fprintf(stderr, "%ld\n", cp);
-
 	return 0;
 }
