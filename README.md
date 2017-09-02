@@ -23,3 +23,8 @@ Four different loop scheduling types (kinds) can be provided to OpenMP, as shown
 | auto	  | When schedule (auto) is specified, the decision regarding scheduling is delegated to the compiler. The programmer gives the compiler the freedom to choose any possible mapping of iterations to threads in the team. |
 | runtime | Uses the OMP_schedule environment variable to specify which one of the three loop-scheduling types should be used. OMP_SCHEDULE is a string formatted exactly the same as would appear on the parallel construct. |
 
+Bibliografia
+------------
+
+Parallel Programming with OpenMP http://www.linux-magazine.com/Issues/2008/94/OpenMP
+
