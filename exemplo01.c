@@ -16,14 +16,31 @@
 /*
  * Verifica se um numero e primo (força bruta)
  */ 
-int ehprimo(long int n, const long int s) {
-	if ( 0 == ( n % 2 ) ) return NAO_PRIMO;
-    for (long int i = 2; i < s; i++) {
+int ehprimo(long int n);
+
+/*
+ * Valida os parãmetros de entrada:
+ * O limite inferior e superior são obrigatórios.
+ * O limite inferior deve ser menor que o superior.
+ * O limite inferior e superior devem ser maiores que zero.
+ * É sempre bom verificar o valor máximo aceitável usando limits.h.
+ * long int * inf - O ponteiro é necessário já que vamos alterar o valor dentro da função!
+ * long int * sup - O mesmo aqui!
+ */ 
+int retorna_inf_sup(int argc, char ** argv, long int * inf, long int * sup);
+
+/*
+ * Verifica se um numero e primo (força bruta)
+ */ 
+int ehprimo(long int n) {
+	int primo = EH_PRIMO;	
+    for (long int i = 2; i < sqrt(n + 1); i++) {
 		if ( 0 == ( n % i ) ) {
-			return NAO_PRIMO;
+			primo = NAO_PRIMO;
+			break;
         }
     }
-    return EH_PRIMO;
+    return primo;
 }
 
 /*
@@ -83,7 +100,7 @@ int main(int argc, char ** argv) {
 	// Primeiro teste
 	#pragma omp parallel for schedule(runtime) reduction(+:cp)
 	for (i = inf; i <= sup; i++) {
-		if (ehprimo(i, sqrt(i+1)))	{
+		if (ehprimo(i))	{
 			cp++;
 			#ifdef DEBUG
 			printf("%ld, ",i);
