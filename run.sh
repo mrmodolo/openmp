@@ -19,14 +19,14 @@
 
 set -o nounset                                  # Treat unset variables as an error
 
-# NPROCS=1
-# nprocs=$(grep '^physical id' /proc/cpuinfo  | sort -u | wc -l)
-# ncores=$(grep '^processor' /proc/cpuinfo | sort -u | wc -l)
-# coresperproc=$(($ncores/$nprocs))
-# OMP_NUM_THREADS=$(($NPROCS*$coresperproc))
+NPROCS=$(grep '^physical id' /proc/cpuinfo  | sort -u | wc -l)
+NCORES=$(grep '^processor' /proc/cpuinfo | sort -u | wc -l)
+CORESPERPROC=$(($NCORES/$NPROCS))
+
 INF=2
 SUP=9999999
 KIND=(static dynamic guided auto)
+THREADS=(1 2 3 4 8)
 TIME=/usr/bin/time
 PROGRAMA="./exemplo01"
 INF=2
@@ -41,9 +41,13 @@ do
 	echo ""
 	for I in $(seq 1 5)
 	do
-		for T in $(seq 1 4)
+		for T in "${THREADS[@]}"
 		do
 			echo "OMP_NUM_THREADS=$T; $TIME $PROGRAMA $INF $SUP"
+			if (( $T > $CORESPERPROC ))
+			then
+				echo "!!!!!!OVERSUBSCRIPTION!!!!!!"
+			fi
 			START=$(date +"%H:%M:%S")
 			OUTPUT=$(export OMP_NUM_THREADS=$T; $TIME -f "$K,$T,%e,%U,%S,%P" ./exemplo01 $INF $SUP 2>&1 > /dev/null)
 			END=$(date +"%H:%M:%S")
