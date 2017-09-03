@@ -1,5 +1,5 @@
 exemplo01
 exemplo01.o
-openmp.csv
+*.csv
 hello
 exemplo01-clang
