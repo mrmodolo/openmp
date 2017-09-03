@@ -16,17 +16,14 @@
 /*
  * Verifica se um numero e primo (força bruta)
  */ 
-int ehprimo(long int n) {
-	int primo = EH_PRIMO;
-    long int i;
-	const long int LIMITE = sqrt(n + 1);
-    for (i = 2; i < LIMITE; i++) {
-		if ( 0 == (n%i) ) {
-			primo = NAO_PRIMO;
-            break;
+int ehprimo(long int n, const long int s) {
+	if ( 0 == ( n % 2 ) ) return NAO_PRIMO;
+    for (long int i = 2; i < s; i++) {
+		if ( 0 == ( n % i ) ) {
+			return NAO_PRIMO;
         }
     }
-    return primo;
+    return EH_PRIMO;
 }
 
 /*
@@ -86,7 +83,7 @@ int main(int argc, char ** argv) {
 	// Primeiro teste
 	#pragma omp parallel for schedule(runtime) reduction(+:cp)
 	for (i = inf; i <= sup; i++) {
-		if (ehprimo(i))	{
+		if (ehprimo(i, sqrt(i+1)))	{
 			cp++;
 			#ifdef DEBUG
 			printf("%ld, ",i);
