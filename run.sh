@@ -28,7 +28,7 @@ SUP=9999999
 KIND=(static dynamic guided auto)
 THREADS=(1 2 3 4 8)
 TIME=/usr/bin/time
-PROGRAMA="./exemplo01"
+PROGRAMA="./exemplo02-clang"
 INF=2
 SUP=9999999
 
@@ -49,7 +49,7 @@ do
 				echo "!!!!!!OVERSUBSCRIPTION!!!!!!"
 			fi
 			START=$(date +"%H:%M:%S")
-			OUTPUT=$(export OMP_NUM_THREADS=$T; $TIME -f "$K,$T,%e,%U,%S,%P" ./exemplo01 $INF $SUP 2>&1 > /dev/null)
+			OUTPUT=$(export OMP_NUM_THREADS=$T; $TIME -f "$K,$T,%e,%U,%S,%P" $PROGRAMA $INF $SUP 2>&1 > /dev/null)
 			END=$(date +"%H:%M:%S")
 			echo $OUTPUT | tr ' ' ','
 			echo $OUTPUT | tr ' ' ',' >> $PROGRAMA.csv
