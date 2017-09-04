@@ -23,9 +23,16 @@ Four different loop scheduling types (kinds) can be provided to OpenMP, as shown
 | auto	  | When schedule (auto) is specified, the decision regarding scheduling is delegated to the compiler. The programmer gives the compiler the freedom to choose any possible mapping of iterations to threads in the team. |
 | runtime | Uses the OMP_schedule environment variable to specify which one of the three loop-scheduling types should be used. OMP_SCHEDULE is a string formatted exactly the same as would appear on the parallel construct. |
 
+*Dicas:*
+
+Como calcular a média e o desvio padrão com awk para um arquivo com valores separados por virgulas:
+
+$ cat ARQUIVO.CSV | awk -F',' '{print $4}' | awk '{delta = $1 - avg; avg += delta / NR; mean2 += delta * ($1 - avg); t+=$1; i+=1} END { print sqrt(mean2 / NR),t/i; }'
+
 Bibliografia
 ------------
 
+* OpenMP http://www.openmp.org/resources/
 * Parallel Programming with OpenMP http://www.linux-magazine.com/Issues/2008/94/OpenMP
 * OpenMP: What is the benefit of nesting parallelizations? https://stackoverflow.com/questions/4317551/openmp-what-is-the-benefit-of-nesting-parallelizations
 * Oversubscription on Multicore Processors http://upc.lbl.gov/publications/ipdps-iancu.pdf

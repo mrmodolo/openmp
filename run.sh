@@ -33,7 +33,7 @@ INF=2
 SUP=9999999
 
 clear
-echo "COUNTER,SCHEDULE,THREADS,REAL,USER,SYS,CPU" > openmp.csv
+echo "COUNTER,SCHEDULE,THREADS,REAL,USER,SYS,CPU" > ${PROGRAMA}.csv
 for K in "${KIND[@]}"
 do	
 	export OMP_schedule=$K
@@ -52,7 +52,7 @@ do
 			OUTPUT=$(export OMP_NUM_THREADS=$T; $TIME -f "$K,$T,%e,%U,%S,%P" $PROGRAMA $INF $SUP 2>&1 > /dev/null)
 			END=$(date +"%H:%M:%S")
 			echo $OUTPUT | tr ' ' ','
-			echo $OUTPUT | tr ' ' ',' >> $PROGRAMA.csv
+			echo $OUTPUT | tr ' ' ',' >> ${PROGRAMA}.csv
 			echo "$START : $END"
 			echo ""
 		done
