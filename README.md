@@ -32,7 +32,7 @@ $ cat ARQUIVO.CSV | awk -F',' '{print $4}' | awk '{delta = $1 - avg; avg += delt
 Observações
 -----------
 * Aumentar o número de threads além do número de cores (oversubscription) não apresentou ganho significativo;
-* Os diderentes tipos de paralelização se comportaram de forma semelhante pelo menos para o exemplo em questão;
+* Os diferentes tipos de paralelização se comportaram de forma semelhante pelo menos para o exemplo em questão;
 * O tempo USER é praticamente constante já que denota o uso de CPU;
 
 ![Média de execução por número de threads](media-desvio-padrao.png)
