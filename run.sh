@@ -26,9 +26,9 @@ CORESPERPROC=$(($NCORES/$NPROCS))
 INF=2
 SUP=9999999
 KIND=(static dynamic guided auto)
-THREADS=(1 2 3 4 8)
+THREADS=(1 2 3 4 8 16 32)
 TIME=/usr/bin/time
-PROGRAMA="./exemplo02-clang"
+PROGRAMA="./exemplo01"
 INF=2
 SUP=9999999
 
