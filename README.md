@@ -29,6 +29,14 @@ Como calcular a média e o desvio padrão com awk para um arquivo com valores se
 
 $ cat ARQUIVO.CSV | awk -F',' '{print $4}' | awk '{delta = $1 - avg; avg += delta / NR; mean2 += delta * ($1 - avg); t+=$1; i+=1} END { print sqrt(mean2 / NR),t/i; }'
 
+Observações
+-----------
+* Aumentar o número de threads além do número de cores (oversubscription) não apresentou ganho significativo;
+* Os diderentes tipos de paralelização se comportaram de forma semelhante pelo menos para o exemplo em questão;
+* O tempo USER é praticamente constante já que denota o uso de CPU;
+
+![Média de execução por número de threads](media-desvio-padrao.png)
+
 Bibliografia
 ------------
 
