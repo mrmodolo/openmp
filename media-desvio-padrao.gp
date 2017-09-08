@@ -18,7 +18,7 @@ set ylabel 'Average run time (seconds)' font ',10'
 
 set terminal png size 800,600 enhanced
 set output 'media-desvio-padrao.png'
-csv_file = "media-desvio-padrao.csv"
+csv_file = "data/media-desvio-padrao.csv"
 plot csv_file index 0 using 3:4 t "static", \
 	csv_file index 1 using 3:4 t "dynamic", \
 	csv_file index 2 using 3:4 t "guided", \

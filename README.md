@@ -35,7 +35,11 @@ Observações
 * Os diferentes tipos de paralelização se comportaram de forma semelhante pelo menos para o exemplo em questão;
 * O tempo USER é praticamente constante já que denota o uso de CPU;
 
-![Média de execução por número de threads](media-desvio-padrao.png)
+Média de execução por número de threads
+![Média de execução por número de threads](imagens/media-desvio-padrao.png)
+
+Média de execução por número de threads - Histograma
+![Média de execução por número de threads - Histograma](imagens/media-desvio-padrao-histograma.png)
 
 Bibliografia
 ------------
