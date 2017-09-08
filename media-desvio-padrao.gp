@@ -18,8 +18,14 @@ set ylabel 'Average run time (seconds)' font ',10'
 
 set terminal png size 800,600 enhanced
 set output 'media-desvio-padrao.png'
-csv_file = "data/media-desvio-padrao.csv"
-plot csv_file index 0 using 3:4 t "static", \
-	csv_file index 1 using 3:4 t "dynamic", \
-	csv_file index 2 using 3:4 t "guided", \
-	csv_file index 3 using 3:4 t "auto"
+
+dat_file = "/tmp/~plot.dat"
+
+set key autotitle columnheader
+stats dat_file using 0 nooutput
+plot for [IDX=0:STATS_blocks-1] \
+	dat_file \
+	index IDX \
+	using 3:4 \
+	title columnheader(1)
+

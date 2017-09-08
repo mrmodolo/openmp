@@ -44,11 +44,14 @@ Média de execução por número de threads - Histograma
 Bibliografia
 ------------
 
-* OpenMP http://www.openmp.org/resources/
-* Parallel Programming with OpenMP http://www.linux-magazine.com/Issues/2008/94/OpenMP
-* OpenMP: What is the benefit of nesting parallelizations? https://stackoverflow.com/questions/4317551/openmp-what-is-the-benefit-of-nesting-parallelizations
-* Oversubscription on Multicore Processors http://upc.lbl.gov/publications/ipdps-iancu.pdf
-* OpenMP Environment Variables http://docs.cray.com/books/S-2179-52/html-S-2179-52/z1050587246oswald.html
-* OpenMP Scheduling http://cs.umw.edu/~finlayson/class/fall14/cpsc425/notes/12-scheduling.html
-* Clang Compiler User’s Manual https://clang.llvm.org/docs/UsersManual.html#controlling-errors-and-warnings
+* OpenMP - http://www.openmp.org/resources/
+* Parallel Programming with OpenMP - http://www.linux-magazine.com/Issues/2008/94/OpenMP
+* OpenMP: What is the benefit of nesting parallelizations? - https://stackoverflow.com/questions/4317551/openmp-what-is-the-benefit-of-nesting-parallelizations
+* Oversubscription on Multicore Processors - http://upc.lbl.gov/publications/ipdps-iancu.pdf
+* OpenMP Environment Variables - http://docs.cray.com/books/S-2179-52/html-S-2179-52/z1050587246oswald.html
+* OpenMP Scheduling - http://cs.umw.edu/~finlayson/class/fall14/cpsc425/notes/12-scheduling.html
+* Clang Compiler User’s Manual - https://clang.llvm.org/docs/UsersManual.html#controlling-errors-and-warnings
+* gnuplot 5.0 - An Interactive Plotting Program http://www.gnuplot.info/docs_5.0/gnuplot.pdf
+* gnuplot demos - http://gnuplot.sourceforge.net/
+* gnuplot Histograms - http://psy.swansea.ac.uk/staff/carter/gnuplot/gnuplot_histograms.htm
 
