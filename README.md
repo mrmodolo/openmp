@@ -41,6 +41,42 @@ Média de execução por número de threads
 Média de execução por número de threads - Histograma
 ![Média de execução por número de threads - Histograma](imagens/media-desvio-padrao-histograma.png)
 
+Alguns testes com oversubscription
+----------------------------------
+```
+$ export OMP_NUM_THREADS=8
+# Hexa 0x00000001 é CPU 0 Binário 0001
+$ /usr/bin/time taskset 0x00000001 ./exemplo01 2 9999999;
+count: 664579 user elapsed: 25.085136 omp elapsed: 25.139567                         
+664579                                    
+25.08user 0.00system 0:25.14elapsed 99%CPU (0avgtext+0avgdata 2184maxresident)k      
+64inputs+0outputs (1major+170minor)pagefaults 0swaps                                 
+
+$ export OMP_NUM_THREADS=16
+# Hexa 0x00000003 é CPU 0 e 1 Binário 0011
+$ /usr/bin/time taskset 0x00000003 ./exemplo01 2 9999999;
+count: 664579 user elapsed: 24.838033 omp elapsed: 12.459349                         
+664579                                    
+24.82user 0.01system 0:12.46elapsed 199%CPU (0avgtext+0avgdata 2192maxresident)k     
+0inputs+0outputs (0major+187minor)pagefaults 0swaps                                  
+
+$ export OMP_NUM_THREADS=24
+# Hexa 0x00000007 é CPU 0,1 e 2 Binário 0111
+$ /usr/bin/time taskset 0x00000007 ./exemplo01 2 9999999;
+count: 664579 user elapsed: 25.868427 omp elapsed: 8.738553                          
+664579                                    
+25.56user 0.30system 0:08.74elapsed 295%CPU (0avgtext+0avgdata 2268maxresident)k     
+0inputs+0outputs (0major+205minor)pagefaults 0swaps                                  
+
+$ export OMP_NUM_THREADS=32
+# Hexa 0x0000000F é CPU 0,1,2 e 3 Binário 1111
+/usr/bin/time taskset 0x0000000F ./exemplo01 2 9999999;
+count: 664579 user elapsed: 26.363840 omp elapsed: 7.129109                          
+664579                                    
+25.69user 0.67system 0:07.13elapsed 369%CPU (0avgtext+0avgdata 2384maxresident)k     
+0inputs+0outputs (0major+219minor)pagefaults 0swaps       
+```
+
 Bibliografia
 ------------
 
